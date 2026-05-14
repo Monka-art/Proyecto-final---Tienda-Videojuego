@@ -7,13 +7,13 @@ public class TiendaRPG {
 
     // Matriz de la tienda
     static String[][] tienda = {
-            {"Espada", "150", "10"},
-            {"Pocion", "50", "20"},
-            {"Armadura", "300", "5"}
+            { "Espada", "150", "10" },
+            { "Pocion", "50", "20" },
+            { "Armadura", "300", "5" }
     };
 
     // Inventario del jugador
-    static int[] inventarioJugador = {0, 0, 0};
+    static int[] inventarioJugador = { 0, 0, 0 };
 
     // Dinero inicial
     static double dinero = 500;
@@ -81,6 +81,21 @@ public class TiendaRPG {
 
     public static void mostrarProductos() {
 
+        // Ordena antes de mostrar
+        ordenarProductos();
+
+        System.out.println("\n===== PRODUCTOS DISPONIBLES =====");
+
+        for (int i = 0; i < tienda.length; i++) {
+
+            System.out.println(
+                    (i + 1) + ". " +
+                            tienda[i][0] +
+                            " | Precio: " + tienda[i][1] +
+                            " monedas | Stock: " + tienda[i][2]);
+
+        }
+
     }
 
     public static void comprarProducto() {
@@ -96,6 +111,27 @@ public class TiendaRPG {
     }
 
     public static void ordenarProductos() {
+
+        for (int i = 0; i < tienda.length - 1; i++) {
+
+            for (int j = 0; j < tienda.length - 1 - i; j++) {
+
+                // Convertimos el precio a entero para compararlo
+                int precioActual = Integer.parseInt(tienda[j][1]);
+                int precioSiguiente = Integer.parseInt(tienda[j + 1][1]);
+
+                // Si el actual es mayor, intercambiamos filas
+                if (precioActual > precioSiguiente) {
+
+                    String[] temporal = tienda[j];
+                    tienda[j] = tienda[j + 1];
+                    tienda[j + 1] = temporal;
+
+                }
+
+            }
+
+        }
 
     }
 
