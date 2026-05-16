@@ -108,6 +108,26 @@ public class TiendaRPG {
 
     public static void verInventario() {
 
+        System.out.println("\n===== INVENTARIO DEL JUGADOR =====");
+
+        int totalObjetos = 0;
+
+        for (int i = 0; i < inventarioJugador.length; i++) {
+
+            System.out.println(
+                    tienda[i][0] +
+                            " | Cantidad: " + inventarioJugador[i]);
+
+            totalObjetos += inventarioJugador[i];
+
+        }
+
+        System.out.println("\nDinero disponible: " + dinero + " monedas");
+
+        System.out.println(
+                "Espacio utilizado: " +
+                        totalObjetos + "/" + capacidadMaxima);
+
     }
 
     public static void ordenarProductos() {
