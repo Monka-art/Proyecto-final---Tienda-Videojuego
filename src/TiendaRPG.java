@@ -100,6 +100,86 @@ public class TiendaRPG {
 
     public static void comprarProducto() {
 
+        mostrarProductos();
+
+        try {
+
+            System.out.print("\nSeleccione el numero del producto que desea comprar: ");
+            int opcionProducto = entrada.nextInt();
+
+            // Convertimos a índice real
+            int indice = opcionProducto - 1;
+
+            // Validar que exista
+            if (indice >= 0 && indice < tienda.length) {
+
+                // Obtener stock
+                int stock = Integer.parseInt(tienda[indice][2]);
+
+                // Obtener precio
+                int precio = Integer.parseInt(tienda[indice][1]);
+
+                // Calcular espacio utilizado
+                int totalObjetos = 0;
+
+                for (int i = 0; i < inventarioJugador.length; i++) {
+                    totalObjetos += inventarioJugador[i];
+                }
+
+                // Validar espacio
+                if (totalObjetos >= capacidadMaxima) {
+
+                    System.out.println("Inventario lleno.");
+
+                }
+
+                // Validar stock
+                else if (stock <= 0) {
+
+                    System.out.println("No hay stock disponible.");
+
+                }
+
+                // Validar dinero
+                else if (dinero < precio) {
+
+                    System.out.println("No tienes suficiente dinero.");
+
+                }
+
+                else {
+
+                    // Comprar producto
+                    dinero -= precio;
+
+                    inventarioJugador[indice]++;
+
+                    stock--;
+
+                    tienda[indice][2] = String.valueOf(stock);
+
+                    System.out.println(
+                            "Compraste: " + tienda[indice][0]);
+
+                }
+
+            }
+
+            else {
+
+                System.out.println("Producto invalido.");
+
+            }
+
+        }
+
+        catch (Exception e) {
+
+            System.out.println("Error: Debe ingresar un numero.");
+            entrada.nextLine();
+
+        }
+
     }
 
     public static void venderProducto() {
