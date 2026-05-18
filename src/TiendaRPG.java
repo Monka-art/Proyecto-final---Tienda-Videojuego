@@ -184,6 +184,68 @@ public class TiendaRPG {
 
     public static void venderProducto() {
 
+        verInventario();
+
+        try {
+
+            System.out.print("\nSeleccione el numero del producto que desea vender: ");
+            int opcionProducto = entrada.nextInt();
+
+            // Convertimos a índice real
+            int indice = opcionProducto - 1;
+
+            // Validar existencia
+            if (indice >= 0 && indice < tienda.length) {
+
+                // Validar que tenga el objeto
+                if (inventarioJugador[indice] > 0) {
+
+                    // Obtener precio
+                    int precio = Integer.parseInt(tienda[indice][1]);
+
+                    // Aumentar dinero
+                    dinero += precio;
+
+                    // Reducir inventario
+                    inventarioJugador[indice]--;
+
+                    // Obtener stock actual
+                    int stock = Integer.parseInt(tienda[indice][2]);
+
+                    // Aumentar stock
+                    stock++;
+
+                    // Guardar nuevo stock
+                    tienda[indice][2] = String.valueOf(stock);
+
+                    System.out.println(
+                            "Vendiste: " + tienda[indice][0]);
+
+                }
+
+                else {
+
+                    System.out.println("No tienes este objeto.");
+
+                }
+
+            }
+
+            else {
+
+                System.out.println("Producto invalido.");
+
+            }
+
+        }
+
+        catch (Exception e) {
+
+            System.out.println("Error: Debe ingresar un numero.");
+            entrada.nextLine();
+
+        }
+
     }
 
     public static void verInventario() {
